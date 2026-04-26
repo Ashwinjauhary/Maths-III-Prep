@@ -92,6 +92,22 @@ header {
   color: white;
 }
 
+/* Hamburger Menu Button */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--text-main);
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1001;
+}
+
+.menu-toggle:focus {
+  outline: none;
+}
+
 /* Hero Section */
 .hero {
   padding-top: 10rem;
@@ -157,7 +173,7 @@ header {
 /* Unit Cards */
 .units-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   margin-bottom: 4rem;
 }
@@ -316,7 +332,117 @@ header {
 }
 
 @media (max-width: 768px) {
-  .hero h1 { font-size: 2.5rem; }
-  header { padding: 1rem; }
-  .nav-links { display: none; }
+  .hero {
+    padding-top: 8rem;
+    padding-bottom: 3rem;
+  }
+
+  .hero h1 { 
+    font-size: 2.2rem; 
+    padding: 0 1rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+    padding: 0 1rem;
+    margin-bottom: 2rem;
+  }
+
+  header { 
+    padding: 1rem; 
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 280px;
+    background: white;
+    flex-direction: column;
+    padding: 6rem 2rem 2rem 2rem;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+    z-index: 1000;
+    gap: 1rem;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links a {
+    font-size: 1.1rem;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+  }
+
+  .nav-links a:last-child {
+    border-bottom: none;
+  }
+
+  .nav-links a.active {
+    border-radius: 0.5rem;
+  }
+
+  .badge {
+    display: none; /* Hide year badge on mobile to save space */
+  }
+
+  .container {
+    padding: 0 1rem 3rem 1rem;
+  }
+
+  .important-bar {
+    padding: 1rem;
+    gap: 1rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .important-bar i {
+    font-size: 2rem !important;
+  }
+
+  .search-box {
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+  }
+
+  .search-box input {
+    font-size: 1rem;
+    padding: 1rem 1rem 1rem 3rem;
+  }
+
+  .search-icon {
+    left: 2rem;
+  }
+
+  /* Unit Detail adjustments */
+  #unitHeader h1 {
+    font-size: 2.5rem !important;
+  }
+
+  .tabs {
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tab {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .question-card {
+    padding: 1.25rem;
+  }
+
+  .question-text {
+    font-size: 1.1rem;
+  }
 }

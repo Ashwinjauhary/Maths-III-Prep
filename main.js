@@ -1,4 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Hamburger Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navLinks.classList.toggle('active');
+            // Change icon
+            const icon = menuToggle.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.className = 'ph ph-x';
+            } else {
+                icon.className = 'ph ph-list';
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                navLinks.classList.remove('active');
+                menuToggle.querySelector('i').className = 'ph ph-list';
+            }
+        });
+
+        // Close menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.querySelector('i').className = 'ph ph-list';
+            });
+        });
+    }
+
     // Search Logic (Shared if search box exists)
     const mainSearch = document.getElementById('mainSearch');
     if (mainSearch) {
