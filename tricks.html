@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tricky Techniques | Maths Padai</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <header>
+        <div class="logo" onclick="location.href='index.html'" style="cursor:pointer">
+            <i class="ph-fill ph-book-open"></i>
+            Student Portal 2026
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Dashboard</a>
+            <a href="units.html">Units</a>
+            <a href="important.html">Exam Prep</a>
+            <a href="tricks.html" class="active">Shortcuts</a>
+        </nav>
+    </header>
+
+    <main class="container" style="padding-top: 10rem;">
+        <div class="animate-fade">
+            <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">Tricky <span style="color: var(--secondary);">Techniques</span></h1>
+            <p style="color: var(--text-muted); font-size: 1.2rem; margin-bottom: 4rem;">Master these expert shortcuts to solve complex math problems in seconds.</p>
+        </div>
+
+        <div class="units-grid" id="tricksGrid">
+            <!-- Cards -->
+            <div class="unit-card animate-fade">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">Order & Degree Hack</h3>
+                <p style="font-size: 1rem; line-height: 1.6; color: var(--text-muted);">
+                    If a differential equation contains derivatives inside transcendental functions like <b>sin(y')</b>, <b>cos(y')</b>, <b>log(y')</b>, or <b>e^(y')</b>, the <b>Degree is NOT DEFINED</b>. The Order is always the highest derivative present.
+                </p>
+            </div>
+            <div class="unit-card animate-fade" style="animation-delay: 0.1s">
+                <h3 style="color: var(--secondary); margin-bottom: 1rem;">Euler's Fast Conversion</h3>
+                <p style="font-size: 1rem; line-height: 1.6; color: var(--text-muted);">
+                    Always use <b>eⁱᶿ = cos θ + i sin θ</b>. To find the real part of complex powers like <b>iⁱ</b>, remember it is <b>e^(-π/2)</b>. This is a common 1-mark question!
+                </p>
+            </div>
+            <div class="unit-card animate-fade" style="animation-delay: 0.2s">
+                <h3 style="color: var(--accent); margin-bottom: 1rem;">Solenoidal vs Irrotational</h3>
+                <p style="font-size: 1rem; line-height: 1.6; color: var(--text-muted);">
+                    <b>Solenoidal:</b> Think "D" for Divergence and "Dot" product (∇·F = 0).<br>
+                    <b>Irrotational:</b> Think "C" for Curl and "Cross" product (∇×F = 0).<br>
+                    Conservative fields are always Irrotational.
+                </p>
+            </div>
+            <div class="unit-card animate-fade" style="animation-delay: 0.3s">
+                <h3 style="color: #fbbf24; margin-bottom: 1rem;">Fourier Symmetry</h3>
+                <p style="font-size: 1rem; line-height: 1.6; color: var(--text-muted);">
+                    <b>Even Function:</b> bₙ = 0 (only Cosine terms remain).<br>
+                    <b>Odd Function:</b> a₀ = 0, aₙ = 0 (only Sine terms remain).<br>
+                    This saves 90% of calculation time in MCQs!
+                </p>
+            </div>
+            <div class="unit-card animate-fade" style="animation-delay: 0.4s">
+                <h3 style="color: #22c55e; margin-bottom: 1rem;">Integrating Factor Tip</h3>
+                <p style="font-size: 1rem; line-height: 1.6; color: var(--text-muted);">
+                    For <b>dy/dx + Py = Q</b>, IF is <b>e^(∫P dx)</b>. If P is <b>1/x</b>, IF is simply <b>x</b>. If P is <b>cot x</b>, IF is <b>sin x</b>.
+                </p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

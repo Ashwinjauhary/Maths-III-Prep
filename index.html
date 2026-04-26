@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maths Padai | Next-Level Prep</title>
+    <meta name="description" content="Ultimate Mathematics III Preparation Tool for BCA students. Master Complex Numbers, Vector Calculus, Fourier Series and ODE.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <header>
+        <div class="logo" onclick="location.href='index.html'" style="cursor:pointer">
+            <i class="ph-fill ph-book-open"></i>
+            Student Portal 2026: Maths III
+        </div>
+        <nav class="nav-links">
+            <a href="index.html" class="active">Dashboard</a>
+            <a href="units.html">Units</a>
+            <a href="important.html">Exam Prep</a>
+            <a href="tricks.html">Shortcuts</a>
+        </nav>
+        <div class="badge">
+            <i class="ph-fill ph-graduation-cap"></i> 2026 Edition
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div style="display:flex; justify-content:center; gap:1rem; margin-bottom: 2rem;">
+                <span class="badge" style="background: #eff6ff; color: #3b82f6;">2026 Exam Protocol</span>
+                <span class="badge" style="background:#f0fdf4; color:#16a34a;">Deep PDF Analysis</span>
+            </div>
+            <h1 class="animate-fade">Master Maths III with <br><span style="color: var(--primary);">Data-Driven Study.</span></h1>
+            <p class="animate-fade" style="animation-delay: 0.2s;">Full 2026 syllabus coverage for Kanpur University. We've analyzed the KPH & Nobel materials so you don't have to. Choose between **Quiz Mode** to test yourself or **Reading Mode** for fast revision.</p>
+            
+            <div class="search-box animate-fade" style="animation-delay: 0.4s;">
+                <i class="ph ph-magnifying-glass search-icon"></i>
+                <input type="text" id="mainSearch" placeholder="Search for 250+ questions, formulas, or shortcuts...">
+            </div>
+        </section>
+
+        <div class="container">
+            <div id="important" class="important-bar animate-fade" onclick="location.href='important.html'">
+                <i class="ph-fill ph-lightning" style="color: #fbbf24; font-size: 2.5rem;"></i>
+                <div>
+                    <h3 style="font-weight: 800; font-size: 1.5rem;">2026 High Yield Radar</h3>
+                    <p style="color: var(--text-muted); font-size: 1rem;">View topics and questions most likely to appear in the 2026 Semester Exams.</p>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                <div class="unit-card animate-fade" onclick="location.href='units.html'">
+                    <i class="ph-fill ph-folders"></i>
+                    <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Syllabus Modules</h2>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Deep dive into Units 1-5. Toggle between **Interactive Quiz** and **Instant Reading** modes for every question.</p>
+                </div>
+                <div class="unit-card animate-fade" style="animation-delay: 0.1s" onclick="location.href='important.html'">
+                    <i class="ph-fill ph-chart-line-up" style="background:#fff7ed; color:#f97316;"></i>
+                    <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Exam Analytics</h2>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Analysis of 5 years of Nobel and KPH papers to predict the most important questions for your session.</p>
+                </div>
+                <div class="unit-card animate-fade" style="animation-delay: 0.2s" onclick="location.href='tricks.html'">
+                    <i class="ph-fill ph-lightning-bolt" style="background:#f0f9ff; color:#0ea5e9;"></i>
+                    <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Math Hacks</h2>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Time-saving techniques extracted from top-scoring students and expert math professors.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="data.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Units | Maths Padai</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <header>
+        <div class="logo" onclick="location.href='index.html'" style="cursor:pointer">
+            <i class="ph-fill ph-book-open"></i>
+            Student Portal 2026
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Dashboard</a>
+            <a href="units.html" class="active">Units</a>
+            <a href="important.html">Exam Prep</a>
+            <a href="tricks.html">Shortcuts</a>
+        </nav>
+    </header>
+
+    <main class="container" style="padding-top: 10rem;">
+        <h1 style="font-size: 3rem; margin-bottom: 1rem;">Course <span style="color: var(--primary);">Units</span></h1>
+        <p style="color: var(--text-muted); margin-bottom: 4rem;">Select a unit to dive into practice questions, formulas, and expert exam tips.</p>
+        
+        <div class="units-grid" id="unitsGrid">
+            <!-- Cards injected via JS -->
+        </div>
+    </main>
+
+    <script src="data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const unitsGrid = document.getElementById('unitsGrid');
+            MATH_DATA.units.forEach(unit => {
+                const card = document.createElement('div');
+                card.className = 'unit-card animate-fade';
+                card.innerHTML = `
+                    <div style="font-size: 0.8rem; color: var(--primary); margin-bottom: 0.5rem; font-weight: 600;">UNIT ${unit.id}</div>
+                    <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">${unit.title}</h2>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                        Explore 50 questions and formulas.
+                    </p>
+                    <div class="badge" style="font-size: 0.7rem; width: fit-content;">Start Learning</div>
+                `;
+                card.onclick = () => location.href = `unit.html?id=${unit.id}`;
+                unitsGrid.appendChild(card);
+            });
+        });
+    </script>
+</body>
+</html>

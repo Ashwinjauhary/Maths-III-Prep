@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Detail | Maths Padai</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <header>
+        <div class="logo" onclick="location.href='index.html'" style="cursor:pointer">
+            <i class="ph-fill ph-book-open"></i>
+            Student Portal
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Dashboard</a>
+            <a href="units.html" class="active">Units</a>
+            <a href="important.html">Exam Prep</a>
+            <a href="tricks.html">Shortcuts</a>
+        </nav>
+    </header>
+
+    <main class="container" style="padding-top: 10rem;">
+        <div id="unitHeader" class="animate-fade">
+            <!-- Injected -->
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 3rem; margin-bottom: 2rem; background: white; padding: 1rem; border-radius: 1rem; border: 1px solid var(--border);">
+            <div class="tabs" id="subTabs" style="margin-bottom: 0;">
+                <div class="tab active" data-view="questions">Practice MCQs</div>
+                <div class="tab" data-view="formulas">Formula Sheet</div>
+                <div class="tab" data-view="tips">Exam Tips</div>
+            </div>
+            
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-muted);">Mode:</span>
+                <div id="modeToggle" style="display: flex; background: var(--bg-main); padding: 0.3rem; border-radius: 0.75rem; border: 1px solid var(--border);">
+                    <button class="mode-btn active" data-mode="quiz" style="padding: 0.5rem 1rem; border: none; border-radius: 0.5rem; cursor: pointer; font-weight: 600; transition: 0.3s;">Quiz</button>
+                    <button class="mode-btn" data-mode="reading" style="padding: 0.5rem 1rem; border: none; border-radius: 0.5rem; cursor: pointer; font-weight: 600; transition: 0.3s;">Reading</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="questionsContent"></div>
+        <div id="formulasContent" style="display:none;"></div>
+        <div id="tipsContent" style="display:none;"></div>
+    </main>
+
+    <style>
+        .mode-btn { background: transparent; color: var(--text-muted); }
+        .mode-btn.active { background: white; color: var(--primary); shadow: var(--shadow); }
+    </style>
+
+    <script src="data.js"></script>
+    <script>
+        let currentMode = 'quiz';
+        let currentQuestions = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const unitId = parseInt(urlParams.get('id'));
+            const unit = MATH_DATA.units.find(u => u.id === unitId);
+
+            if (!unit) {
+                location.href = 'units.html';
+                return;
+            }
+
+            currentQuestions = unit.questions;
+            document.title = `${unit.title} | Maths Padai 2026`;
+            
+            const unitHeader = document.getElementById('unitHeader');
+            unitHeader.innerHTML = `
+                <div style="font-size: 1rem; color: var(--primary); margin-bottom: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;">Unit ${unit.id}</div>
+                <h1 style="font-size: 4rem;">${unit.title}</h1>
+                <p style="color: var(--text-muted); font-size: 1.2rem; margin-top: 1rem;">${unit.summary || 'Comprehensive study material and curated MCQs.'}</p>
+            `;
+
+            renderQuestions(currentQuestions);
+            renderFormulas(unit.formulas);
+            renderTips(unit.tips);
+
+            // Mode Toggle Logic
+            const modeBtns = document.querySelectorAll('.mode-btn');
+            modeBtns.forEach(btn => {
+                btn.onclick = () => {
+                    modeBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentMode = btn.dataset.mode;
+                    renderQuestions(currentQuestions);
+                };
+            });
+
+            // Tab Switching Logic
+            const subTabs = document.querySelectorAll('.tab');
+            const sections = {
+                questions: document.getElementById('questionsContent'),
+                formulas: document.getElementById('formulasContent'),
+                tips: document.getElementById('tipsContent')
+            };
+
+            subTabs.forEach(tab => {
+                tab.onclick = () => {
+                    subTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const view = tab.dataset.view;
+                    Object.keys(sections).forEach(k => sections[k].style.display = k === view ? 'block' : 'none');
+                };
+            });
+        });
+
+        function renderQuestions(questions) {
+            const container = document.getElementById('questionsContent');
+            container.innerHTML = questions.map((q, idx) => `
+                <div class="question-card animate-fade" style="animation-delay: ${idx * 0.05}s">
+                    <div style="color: var(--primary); font-size: 0.8rem; margin-bottom: 1rem; font-weight: 600;">QUESTION ${idx + 1}</div>
+                    <div class="question-text">${q.q}</div>
+                    <div class="options-grid">
+                        ${q.options.map((opt, oIdx) => {
+                            let extraClass = '';
+                            if (currentMode === 'reading' && oIdx === q.answer) extraClass = 'correct';
+                            return `
+                                <div class="option ${extraClass}" onclick="currentMode === 'quiz' ? checkAnswer(this, ${oIdx}, ${q.answer}) : null" style="${currentMode === 'reading' ? 'pointer-events: none' : ''}">
+                                    ${String.fromCharCode(65 + oIdx)}. ${opt}
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderFormulas(formulas) {
+            const container = document.getElementById('formulasContent');
+            container.innerHTML = `
+                <div class="question-card">
+                    <h3 style="margin-bottom: 2rem; color: var(--primary);">Key Formula Sheet</h3>
+                    <div style="display: grid; gap: 1rem;">
+                        ${formulas.map(f => `
+                            <div style="background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 1rem; border-left: 5px solid var(--primary); font-size: 1.1rem;">
+                                ${f}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderTips(tips) {
+            const container = document.getElementById('tipsContent');
+            container.innerHTML = `
+                <div class="question-card">
+                    <h3 style="margin-bottom: 2rem; color: var(--secondary);">Tricky Techniques & Exam Tips</h3>
+                    <div style="display: grid; gap: 1rem;">
+                        ${tips.map(t => `
+                            <div style="display: flex; gap: 1.5rem; align-items: flex-start; background: rgba(236, 72, 153, 0.05); padding: 1.5rem; border-radius: 1rem;">
+                                <i class="ph-fill ph-star" style="color: var(--secondary); font-size: 1.5rem;"></i>
+                                <p style="font-size: 1.1rem; line-height: 1.6;">${t}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        window.checkAnswer = (el, selected, correct) => {
+            const options = el.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            if (selected === correct) {
+                el.classList.add('correct');
+            } else {
+                el.classList.add('wrong');
+                options[correct].classList.add('correct');
+            }
+        };
+    </script>
+</body>
+</html>

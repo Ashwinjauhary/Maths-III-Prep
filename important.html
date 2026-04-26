@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Most Important Questions | Maths Padai</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <header>
+        <div class="logo" onclick="location.href='index.html'" style="cursor:pointer">
+            <i class="ph-fill ph-book-open"></i>
+            Student Portal 2026
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Dashboard</a>
+            <a href="units.html">Units</a>
+            <a href="important.html" class="active">Exam Prep</a>
+            <a href="tricks.html">Shortcuts</a>
+        </nav>
+    </header>
+
+    <main class="container" style="padding-top: 10rem;">
+        <div class="animate-fade">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                <i class="ph-fill ph-lightning" style="color: #fbbf24; font-size: 2.5rem;"></i>
+                <h1 style="font-size: 3.5rem;">2026 High Yield <span style="color: var(--primary);">Radar</span></h1>
+            </div>
+            <p style="color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem;">Predictive analysis based on historical KPH & Nobel patterns for the 2026 Semester Exams.</p>
+        </div>
+
+        <div class="unit-card animate-fade" style="margin-bottom: 4rem; background: #f0fdf4; border-color: #bbf7d0;">
+            <h2 style="color: #16a34a; margin-bottom: 1.5rem;">📊 Exam Analytics</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                <div>
+                    <h4 style="color: var(--text-main); margin-bottom: 0.5rem;">Estimated Weightage</h4>
+                    <ul style="font-size: 0.9rem; color: var(--text-muted); list-style: none;">
+                        <li>Unit 3 (Fourier): 25%</li>
+                        <li>Unit 1, 2, 5: 20% each</li>
+                        <li>Unit 4 (ODE): 15%</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: var(--text-main); margin-bottom: 0.5rem;">Top Repeated Topics</h4>
+                    <ul style="font-size: 0.9rem; color: var(--text-muted); list-style: none;">
+                        <li>• Euler's Formula (Unit 1)</li>
+                        <li>• Solenoidal Definitions (Unit 2)</li>
+                        <li>• Dirichlet Conditions (Unit 3)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="importantQuestions">
+            <!-- Injected -->
+        </div>
+    </main>
+
+    <script src="data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('importantQuestions');
+            const questions = [];
+            
+            // Extracting representative important questions (e.g. first few of each unit)
+            MATH_DATA.units.forEach(u => {
+                questions.push(...u.questions.slice(0, 4).map(q => ({...q, unitTitle: u.title})));
+            });
+
+            container.innerHTML = questions.map((q, idx) => `
+                <div class="question-card animate-fade" style="animation-delay: ${idx * 0.05}s">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem;">
+                        <span style="color: var(--primary); font-weight: 600; font-size: 0.8rem; text-transform: uppercase;">UNIT: ${q.unitTitle}</span>
+                        <span class="badge" style="color: #fbbf24; border-color: #fbbf24; font-size: 0.7rem;">MOST REPEATED</span>
+                    </div>
+                    <div class="question-text">${q.q}</div>
+                    <div class="options-grid">
+                        ${q.options.map((opt, oIdx) => `
+                            <div class="option" onclick="checkAnswer(this, ${oIdx}, ${q.answer})">
+                                ${String.fromCharCode(65 + oIdx)}. ${opt}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        });
+
+        window.checkAnswer = (el, selected, correct) => {
+            const options = el.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            if (selected === correct) {
+                el.classList.add('correct');
+            } else {
+                el.classList.add('wrong');
+                options[correct].classList.add('correct');
+            }
+        };
+    </script>
+</body>
+</html>
